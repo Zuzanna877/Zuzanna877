@@ -1,11 +1,11 @@
-*
+.home *
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'arial', sans-serif;
 }
-section
+.home section
 {
     position: relative;
     width: 100%;
@@ -14,7 +14,7 @@ section
     align-items: center;
     min-height: 100vh;
 }
-section header
+.home section header
 {
     position: absolute;
     top: 0;
@@ -23,25 +23,25 @@ section header
     justify-content: flex-end;
     padding: 20px;
 }
-section header ul
+.home section header ul
 {
     display: flex;
     justify-content: center;
     align-items: center;
 
 }
-section header ul li
+.home section header ul li
 {
     list-style: none;
     margin-left: 20px;
 }
-section header ul li a
+.home section header ul li a
 {
     color: #111;
     text-decoration: none;
     font-size: 13px;
 }
-section header ul li button
+.home section header ul li button
 {
     background:#4584ef;
     width: 80px;
@@ -55,7 +55,7 @@ section header ul li button
     border-radius: 3px;
     cursor: pointer;
 }
-section .main
+.home section .main
 {
     width: 580px;
     display: flex;
@@ -63,13 +63,13 @@ section .main
     align-items: center;
     justify-content: center;
 }
-section .main .searchBox
+.home section .main .searchBox
 {
     position: relative;
     width: 100%;
     margin-top: 20px; 
 }
-section .main .searchBox .search
+.home section .main .searchBox .search
 {
     width: 100%;
     padding: 13px;
@@ -80,7 +80,7 @@ section .main .searchBox .search
     outline: none;
     font-size: 16px;
 }
-section .main .searchBox .icons
+.home section .main .searchBox .icons
 {
     position: absolute;
     top: 0;
@@ -91,11 +91,11 @@ section .main .searchBox .icons
     align-items: center;
     pointer-events: none; 
 }
-section .main .buttons
+.home section .main .buttons
 {
     margin-top: 20px;
 }
-section .main .buttons button
+.home section .main .buttons button
 {
     margin: 0 5px;
     padding: 12px 20px;
@@ -107,11 +107,11 @@ section .main .buttons button
     border: 1px solid transparent;
     outline: none;
 }
-section .main .buttons button:hover
+.home section .main .buttons button:hover
 {
     border: 1px solid #ccc;
 }
-section .footer
+.home section .footer
 {
     position: absolute;
     bottom: 0;
@@ -119,32 +119,32 @@ section .footer
     width: 100%;
     background: #f2f2f2; 
 }
-section .footer .row
+.home section .footer .row
 {
     padding: 15px 25px;
     border-top: 1px solid rgba(0,0,0,0.05);
 }
-section .footer .row.row2
+.home section .footer .row.row2
 {
     display: flex;
     justify-content: space-between;
 }
-section .footer .row.row2 ul
+.home section .footer .row.row2 ul
 {
     display: flex; 
 }
-section .footer .row.row2 ul li
+.home section .footer .row.row2 ul li
 {
     list-style: none;   
 }
-section .footer .row.row2 ul li a
+.home section .footer .row.row2 ul li a
 {
     text-decoration: none;
     font-size: 14px;
     color: #5f6368;
     margin-right: 25px;
 }
-section .footer .row.row2 ul:nth-child(2) li a
+.home section .footer .row.row2 ul:nth-child(2) li a
 {
     text-decoration: none;
     font-size: 14px;
