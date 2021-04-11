@@ -1,4 +1,5 @@
-body.results {
+  
+.results {
     min-height: 100%;
     position: relative;
 }
@@ -11,7 +12,42 @@ body.results {
     position: fixed;
     background-color: white;
 }
-
+.results #right-side button{
+    border: 1px solid #4285f4;
+    font-weight: bold;
+    outline: none;
+    background: #4285f4;
+    color: #fff;
+    padding: 7px 20px;
+    border-radius: 3px;
+    margin-right: 7px;
+    cursor: pointer;
+    margin-bottom: 15px;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+}
+.results #right-side img {
+	width: 34px;
+	padding: 5px;
+	cursor: pointer;
+    margin: auto 15px;
+    position: absolute;
+    right: 165px;
+    top: 15px;
+}
+.results #right-side img:hover {
+	opacity: .8;
+}
+.results #boxesicon {
+    width: 25px;
+    height: 25px;
+    opacity: 0.6;
+    background-size: 26px;
+    position: relative;
+    right: 130px;
+    bottom: 14px;
+}
 .results #searchbarimage {
     height: 30px;
     padding: 0px 28px 10px 30px;
@@ -26,14 +62,14 @@ body.results {
 
 .results #searchbarmic {
     height: 45px;
-    width: 45px;
+    width: 35px;
     margin-left: auto;
     background-color: white;
 }
 
-
-
-
+.results #searchbarmic img {
+    height: 25px;
+}
 
 .results #searchbarbutton {
     height: 45px;
@@ -95,18 +131,7 @@ body.results {
     outline: none;
 }
 
-.results #boxesicon {
-    width: 25px;
-    height: 25px;
-    background-image: url('images/boxes.png');
-    opacity: 0.6;
-    background-size: 26px;
-    position: absolute;
-    right: 130px;
-    bottom: 14px;
-}
-
-.results #opcjegora::after {
+.results #optionsmenuactive::after {
     content: '';
     display: block;
     position: absolute;
@@ -130,21 +155,24 @@ body.results {
     padding: 0px 10px 15px 20px;
 }
 
-.results #wszystkiewyniki {
+.results #searchresultsarea {
     margin-left: 150px;
     font-family: 'Arial';
 }
 
-.results #numer {
+.results #searchresultsnumber {
     font-size: 0.8rem;
     color: gray;
 }
 
-.results .wynik {
+.results .searchresult {
     margin-left: 8px;
 }
+.results .searchresult p{
+    margin-bottom: 4px;
+}
 
-.results .wynik h2 {
+.results .searchresult h2 {
     font-size: 19px;
     line-height: 18px;
     font-weight: normal;
@@ -153,14 +181,13 @@ body.results {
     margin-top: 25px;
 }
 
-.results .wynik a {
+.results .searchresult a {
     font-size: 14px;
     line-height: 14px;
     color: green;
     margin-bottom: 0px;
 }
-
-.results .wynik button {
+.results .searchresult button {
     font-size: 10px;
     line-height: 14px;
     color: green;
@@ -170,29 +197,16 @@ body.results {
     background-color: white;
 }
 
-.results #bellicon {
-    width: 20px;
-    height: 20px;
-   
-    background-size: 12px;
-    background-position: 50% 50%;
-    background-repeat: no-repeat;
-    border-radius: 30px;
-    position: absolute;
-    right: 180px;
-    bottom: 18px;
-}
-
 .results #profileimage {
-    border-radius: 4px;
-    width: 100px;
-    height: 35px;
+    border-radius: 50px;
+    width: 32px;
+    height: 32px;
     position: absolute;
-    right: 60px;
-    bottom: 11px;
+    right: 40px;
+    bottom: 12px;
 }
 
-.results #opcje {
+.results #optionsbar {
     width: 100%;
     height: 50px;
     border-width: 0px;
@@ -207,7 +221,7 @@ body.results {
     padding-top: 64px;
 }
 
-.results #menu1 {
+.results #optionsmenu1 {
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -216,18 +230,18 @@ body.results {
     margin-left: 150px;
 }
 
-.results #menu1 li {
+.results #optionsmenu1 li {
     padding: 0px 10px 15px 20px;
 }
 
-.results #opcjegora {
+.results #optionsmenuactive {
     color: #4285F4;
     font-weight: bold;
     position: relative;
     z-index: -1;
 }
 
-.results .wynik p {
+.results .searchresult p {
     width: 625px;
     font-size: 13px;
     margin-top: 0px;
@@ -238,6 +252,7 @@ body.results {
     font-weight: normal;
     font-size: 19px;
     margin-top: 40px;
+    padding-left: 140px;
     margin-bottom: 10px;
 }
 
@@ -251,6 +266,7 @@ body.results {
 
 .results .relatedlists {
     display: flex;
+    padding-left: 100px;
     flex-direction: row;
     justify-content: space-between;
     width: 300px;
@@ -260,120 +276,61 @@ body.results {
     margin-bottom: 8px;
 }
 
-.results .pagelist {
-    list-style: none;
-    color: rgb(29, 135, 255);
-    display: flex;
-    flex-direction: row;
-    font-size: 12px;
-    margin-bottom: 30px;
-    margin-left: 100px;
-}
-
-.results .pagelistprevious::before {
-    content: '<';
-    display: block;
-    position: absolute;
-    right: 12px;
-    top: -35px;
-    color: rgb(29, 135, 255);
-    font-size: 20px;
-    transform: scale(0.7, 1.2);
-}
-
-.results .pagelistprevious::after {
-    content: '';
-    display: block;
-    position: absolute;
-    right: -40px;
-    top: -35px;
-    width: 40px;
-    height: 40px;
-    background-image: url('images/g.png');
-    background-repeat: no-repeat;
-    background-size: 28px;
-}
-
-.results .pagelistfirst {
-    margin-left: 20px;
-    font-size: 13px;
-}
-
-.results .pagelistnumber::before, .pagelistfirst::before {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -2px;
-    top: -21px;
-    border-radius: 50px;
-    width: 10px;
-    height: 10px;
-    background-color: white;
-    z-index: 3;
-}
-
-.results .pagelistnumber::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -6px;
-    top: -25px;
-    border-radius: 50px;
-    width: 18px;
-    height: 18px;
-    background-color: rgb(255, 196, 0);
-    z-index: 2;
-}
-
-.results .pagelistfirst::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -6px;
-    top: -25px;
-    border-radius: 50px;
-    width: 18px;
-    height: 18px;
-    background-color: red;
-    z-index: 2;
-}
-
-.results .pagelist li {
-    margin-right: 15px;
+.results table.pagelist {
+   
     position: relative;
+    margin: 0 auto;
+    text-align: center;
+    letter-spacing: -0.12em;
+    font-size: 2.3em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-left: 150px;
 }
 
-.results .pagelistnext {
-    margin-left: 40px;
-    font-size: 13px;
+.results .pagenr {
+    font-size: 12px;
+    color: rgb(50, 93, 246);
+    letter-spacing: normal;
+    text-align: center;
+    cursor: pointer;
 }
 
-.results .pagelistnext::before {
-    content: '>';
-    display: block;
-    position: absolute;
-    left: 5px;
-    top: -35px;
-    color: rgb(29, 135, 255);
-    font-size: 20px;
-    transform: scale(0.7, 1.2);
+.results .next{
+    font-size: 14px;
+    font-weight: bold;
+    margin-left: -50px;
+    color:rgb(0, 3, 166);
+    cursor: pointer;
 }
 
-.results .pagelistnext::after {
-    content: '';
-    display: block;
-    position: absolute;
-    left: -55px;
-    top: -37px;
-    width: 50px;
-    height: 50px;
-    background-image: url('images/gle.png');
-    background-repeat: no-repeat;
-    background-size: 48px;
+.results .pagenr:hover{
+    text-decoration: underline;
+}
+
+.results .blue {
+    color: #518dee;
+}
+
+.results .red {
+    color: rgb(241, 46, 46);
+}
+
+.results .green {
+    color: rgb(49, 177, 37);
+}
+
+.results .yellow {
+    color: rgb(247, 200, 59);
+}
+
+.results .pagelist .pagenr {
+    font-size: 14px;
+    font-weight: normal;
 }
 
 
-.results #stopka {
+.results #footer {
     background-color: rgb(238, 238, 238);
     position: relative;
     left: 0px;
@@ -384,7 +341,7 @@ body.results {
     color: rgb(85, 85, 85);
 }
 
-.results #dol {
+.results #footermenu {
     list-style: none;
     display: flex;
     flex-direction: row;
@@ -394,7 +351,7 @@ body.results {
     padding-bottom: 10px;
 }
 
-.results #dol li {
+.results #footermenu li {
     padding-right: 30px;
 }
 
@@ -409,41 +366,13 @@ body.results {
 .results #footerlocation p:nth-of-type(1) {
     font-weight: bold;
 }
- 
-.results .blue {
-  color: rgb(50, 93, 246);
-}
 
-.results .red {
-  color: rgb(218, 63, 63);
+.results nav{
+	display: none;
 }
-
-.results .green {
-  color: rgb(76, 140, 68);
+.results .section-1{
+	display: none;
 }
-
-.results .yellow {
-  color: rgb(236, 184, 29);
+.results footer{
+	display: none;
 }
-
-.results table {
-  margin: 120 auto;
-  text-align: center;
-  letter-spacing: -0.12em;
-  font-size: 2.3em;
-  margin-bottom: 20px;
-  font-weight: bold;
-}
-
-.results .pageNumber {
-  font-size: 12px;
-  color: rgb(50, 93, 246);
-  letter-spacing: normal;
-  text-align: center;
-}
-.results #x
- {
- padding: 7.5px; 
- border-right: 1px solid lightgray;
-     padding-right: 25px;   
- }
