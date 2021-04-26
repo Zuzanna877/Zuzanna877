@@ -234,7 +234,7 @@
       },
       computed: {
       filteredCities: function() {
-        let result = this.cities.filter(city => city.name.includes(this.googleSearch));
+        let result = this.cities.filter(city => city.name.startsWith(this.googleSearch)) || city.name.toLowerCase().startsWith(this.googleSearch));
         if(result.length>10){
           return result.slice(1,11);
         }
