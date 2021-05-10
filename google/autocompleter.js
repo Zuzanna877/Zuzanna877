@@ -1,4 +1,4 @@
-Vue.component('autocompleter', { 
+Vue.component('v-autocompleter', { 
     template: '<div class="s-box">
 <img src="search.svg" class="search-icon">
 <input ref="first" v-model="googleSearch" list="listaMiast" type="text" class="search_input" aria-label="Szukaj" maxlength="2048" @focus="focused = true" @keyup.down="down()" @keyup.up="up()"
