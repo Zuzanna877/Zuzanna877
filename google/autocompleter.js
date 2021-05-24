@@ -28,6 +28,7 @@ Vue.component('v-autocompleter', {
       }
   },
   watch: {
+    
       forPick: function () {
           this.updated = false;
           
@@ -39,28 +40,26 @@ Vue.component('v-autocompleter', {
           if(this.value.length == 0){
               this.filteredCities = [];
             } else{
-              this.createFilteredList(this.updated);
+              this.CreateCities(this.updated);
               this.updated=true;
       
               if(this.forPick == -1){
                 this.googleSearch_temp = this.value; 
-                this.createFilteredList(true);     
+                this.CreateCities(true);    
               }
             }
           }
       },
   methods: {
-    createFilteredList(bool){
-      if(bool){
-          let result = this.cities.filter(city => city.name.includes(this.value));
-          if(result.length>10){
-              this.filteredCities = result.slice(1,11);
-          }
-          else{
-              this.filteredCities = result;
-          }
-          this.forPick = -1;
+    CreateCities(){
+      let result = this.cities.filter(city => city.name.includes(this.value));
+      if(result.length > 10){
+        this.filteredCities = result.slice(1, 11);
+      }
+      else{
+        this.filteredCities = result;
         }
+        this.list_counter = -1;
   },
     handleClick(name) {
       this.$emit('input', this.value);
@@ -90,7 +89,7 @@ Vue.component('v-autocompleter', {
     },
     clickEnter: function(event){
       if(event) {
-          this.updated = true;
+        this.CreateCities();
           this.forPick = -1;
         }
         this.$emit('enter', this.value);
