@@ -59,7 +59,7 @@ Vue.component('v-autocompleter', {
       else{
         this.filteredCities = result;
         }
-        this.list_counter = -1;
+        this.forPick = -1;
   },
     handleClick(name) {
       this.$emit('input', this.value);
