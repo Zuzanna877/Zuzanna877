@@ -1,46 +1,102 @@
-Vue.component('v-autocompleter', { 
-    template: '<div class="s-box">
-<img src="search.svg" class="search-icon">
-<input ref="first" v-model="googleSearch" list="listaMiast" type="text" class="search_input" aria-label="Szukaj" maxlength="2048" @focus="focused = true" @keyup.down="down()" @keyup.up="up()"
-@keyup.enter="enterClicked()"/>
-<img src="klawiatura.png" class="keyboard-icon">
-<img src="mikrofon.png" class="vs-icon">
-<div class="cities">
-  <li v-for="(city,index) in filteredCities" @click="handleClick(city.name)">
-  <img class="glass" src="googleser.svg">
-  <div class="podpowiedzi" v-html="highlight(city.name)"></div>
-  
-  </li>
-</div>',
-   
-    data: function{ 
-        return {
-      googleSearch: '',
-      isActive: 0,
-      cities: window.cities,
-    }
-    },
-    methods: {
-        handleClick: function (name) {
-          this.googleSearch = name;
-          this.isActive = 1;
-        },
-        highlight: function(phrase) {
-          return phrase.replaceAll(this.googleSearch, '<span class="highlight">' + this.googleSearch + '</span>')
-        }
-      },
-    computed: {
-      filteredCities: function () {
-        if (this.googleSearch.length == 0) {
-          return
-        }
-        let result = this.cities.filter(city => city.name.includes(this.googleSearch))
+Vue.component('v-autocompleter', {
+  template: `
+  <input
+    ref="first"
+    :value="value"
+    type="text"
+    class="search_input"
+    @input="$emit('input', $event.target.value)"
+    @keyup.down="goDown"
+    @keyup.up="goUp"
+    @keyup.enter="clickEnter" />
+  <div class="cities">
+      <li v-for="(city, index) in filteredCities" v-on:click="handleClick(city.name)" :class="{HighBack: index == forPick}">
+        <div class="podpowiedzi" v-on:click="choose(index)" v-html="highlight(city.name)"></div>
+      </li>
+  </div>`,
 
-        if (result.length > 10) {
-          result = result.slice(0, 10)
-        }
-        return result
+  props: ['value', 'options'],
+  data: function(){
+      return {
+          selected_city: '',
+          googleSearch_temp: '',
+          updated: true,
+          isActive: 0,
+          cities: window.cities,
+          forPick: -1,
+          filteredCities: []
       }
+  },
+  watch: {
+      forPick: function () {
+          this.updated = false;
+          
+          if (this.forPick >= 0) {
+              this.$emit('input', this.filteredCities[this.forPick].name);
+            }
+          },
+      value: function(){
+          if(this.value.length == 0){
+              this.filteredCities = [];
+            } else{
+              this.createFilteredList(this.updated);
+              this.updated=true;
+      
+              if(this.forPick == -1){
+                this.googleSearch_temp = this.value; 
+                this.createFilteredList(true);     
+              }
+            }
+          }
+      },
+  methods: {
+    createFilteredList(bool){
+      if(bool){
+          let result = this.cities.filter(city => city.name.includes(this.value));
+          if(result.length>10){
+              this.filteredCities = result.slice(1,11);
+          }
+          else{
+              this.filteredCities = result;
+          }
+          this.forPick = -1;
+        }
+  },
+    handleClick(name) {
+      this.$emit('input', this.value);
+      this.clickEnter();
     },
-    
-  });
+    choose(i){
+      this.$emit('input', this.filteredCities[i].name);
+  },
+    highlight: function(phrase) {
+      return phrase.replaceAll(this.googleSearch, '<span class="highlight">' + this.googleSearch + '</span>')
+    },
+    goDown(){
+      if(this.forPick < this.filteredCities.length -1){
+          this.forPick +=1;
+      }
+      else if(this.forPick == this.filteredCities.length -1){
+          this.forPick = -1;
+      }
+      },
+    goUp(){
+     if(this.forPick > -1){
+         this.forPick -= 1;
+     }
+     else if(this.forPick == 0){
+         this.forPick = this.filteredCities.length -1;
+     }
+    },
+    clickEnter: function(event){
+      if(event) {
+          this.updated = true;
+          this.forPick = -1;
+        }
+        this.$emit('enter', this.value);
+        this.isActive = 1;
+    }
+  },
+
+
+})
