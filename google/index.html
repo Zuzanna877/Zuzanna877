@@ -4,7 +4,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Wyszukiwarka Google</title>
 	<link rel="stylesheet" type="text/css" href="index.css">
-	<link rel="stylesheet" type="text/css" href="index2.css">
+	<link rel="stylesheet" type="text/css" href="autocompleter.css">
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="./cities.js"></script>
     <script src="autocompleter.js"></script>
@@ -25,21 +25,10 @@
       	<form><br><br>
       		<div class="s-box">
       			<img src="search.svg" class="search-icon">
-      			<v-autocompleter><input ref="first" v-model="googleSearch" list="listaMiast"  class="search_input" aria-label="Szukaj" maxlength="2048" type="text"
-              @keyup.down="goTo(activeResult + 1)"
-              @keyup.up="goTo(activeResult - 1)"
-              @keyup.enter="goToResults()"/></v-autocompleter>
+      			<v-autocompleter v-model="googleSearch" :options="cities" @enter="showResults"></v-autocompleter>
                 <img src="klawiatura.png" class="keyboard-icon">
       			<img src="mikrofon.png" class="vs-icon">
-                  <div class="cities">
-                    <li v-for="(city, index) in filteredCities"
-                    :class="{active : autocompleterIsActive && activeResult === index}"
-                    @click="goToResults(city.name)">
-                    <img class="glass" src="googleser.svg">
-                    <div class="podpowiedzi" v-html="highlight(city.name)"></div>
-                    
-                    </li>
-                </div>
+                  
       			<input type="submit" class="s-btn" value="Szukaj w Google">
       			<input type="submit" class="s-btn" value="Szczęśliwy traf">
       		</div>
@@ -240,38 +229,28 @@
 
 </body>
 <script>
-    var app = new Vue({
+  var app = new Vue({
     el: '#app',
     data: {
-      googleSearch: '',
-      isActive: 0,
+      enterValues: [],
       cities: window.cities,
-      autocompleterIsActive: false,
-      
-    },
-    
-    computed: {
-      filteredCities: function () {
-        if (this.googleSearch.length == 0) {
-          return
-        }
-        let result = this.cities.filter(city => city.name.includes(this.googleSearch))
-
-        if (result.length > 10) {
-          result = result.slice(0, 10)
-        }
-        return result
-      }
+      isActive: 0,
+      googleSearch: '',
     },
     methods: {
-      handleClick: function (name) {
-        this.googleSearch = name;
+      showResults(newValue) {
+      this.enterValues.push(newValue);
+
+      if (this.isActive == 0){
         this.isActive = 1;
-      },
-      highlight: function(phrase) {
-        return phrase.replaceAll(this.googleSearch, '<span class="highlight">' + this.googleSearch + '</span>')
+      }
+      else{
+        this.$emit('input', '');
+        this.isActive = 0;
       }
     },
+  }      
+
   });
-  </script>
+</script>
 </html>
