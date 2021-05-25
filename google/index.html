@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Wyszukiwarka Google</title>
 	<link rel="stylesheet" type="text/css" href="index.css">
@@ -239,18 +240,16 @@
     },
     methods: {
       showResults(newValue) {
-      this.enterValues.push(newValue);
+          this.enterValues.push(newValue);
 
-      if (this.isActive == 0){
-        this.isActive = 1;
-      }
-      else{
-        this.$emit('input', '');
-        this.isActive = 0;
+          if (this.isActive == 0) {
+              this.isActive = 1;
+          } else{
+              this.$emit('input', '');
+              this.isActive = 0;
+          }
       }
     },
-  }      
-
   });
 </script>
 </html>
