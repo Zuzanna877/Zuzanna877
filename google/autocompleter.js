@@ -1,5 +1,6 @@
 Vue.component('v-autocompleter', {
   template: `
+  <div class="vue-autocompleter">
   <input
     ref="first"
     :value="value"
@@ -9,10 +10,11 @@ Vue.component('v-autocompleter', {
     @keyup.down="goDown"
     @keyup.up="goUp"
     @keyup.enter="clickEnter" />
-  <div class="cities">
+   <div class="cities">
       <li v-for="(city, index) in filteredCities" v-on:click="handleClick(city.name)" :class="{HighBack: index == forPick}">
         <div class="podpowiedzi" v-on:click="choose(index)" v-html="highlight(city.name)"></div>
       </li>
+    </div>
   </div>`,
 
   props: ['value', 'options'],
@@ -40,12 +42,12 @@ Vue.component('v-autocompleter', {
           if(this.value.length == 0){
               this.filteredCities = [];
             } else{
-              this.CreateCities(this.updated);
+             
               this.updated=true;
       
               if(this.forPick == -1){
                 this.googleSearch_temp = this.value; 
-                this.CreateCities(true);    
+                this.CreateCities();    
               }
             }
           }
@@ -69,7 +71,7 @@ Vue.component('v-autocompleter', {
       this.$emit('input', this.filteredCities[i].name);
   },
     highlight: function(phrase) {
-      return phrase.replaceAll(this.googleSearch, '<span class="highlight">' + this.googleSearch + '</span>')
+      return phrase.replaceAll(this.value, '<span class="highlight">' + this.value + '</span>')
     },
     goDown(){
       if(this.forPick < this.filteredCities.length -1){
