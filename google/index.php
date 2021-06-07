@@ -6,8 +6,8 @@
 	<title>Wyszukiwarka Google</title>
 	<link rel="stylesheet" type="text/css" href="index.css">
 	<link rel="stylesheet" type="text/css" href="autocompleter.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js" integrity="sha512-JZSo0h5TONFYmyLMqp8k4oPhuo6yNk9mHM+FY50aBjpypfofqtEWsAgRDQm94ImLCzSaHeqNvYuD9382CEn2zw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-    <script src="./cities.js"></script>
     <script src="autocompleter.js"></script>
     <link href="autocompleter.css" rel="stylesheet" type="text/css">
 </head>
@@ -238,18 +238,17 @@
       isActive: 0,
       googleSearch: '',
     },
-    methods: {
-      showResults(newValue) {
-          this.enterValues.push(newValue);
-
-          if (this.isActive == 0) {
-              this.isActive = 1;
-          } else{
-              this.$emit('input', '');
-              this.isActive = 0;
-          }
-      }
-    },
-  });
+      methods : {
+            findResultsDebounced : Cowboy.debounce(100, function findResultsDebounced() {
+                console.log('Fetch: ', this.googleSearch)
+                fetch(`http://localhost/search?name=${this.googleSearch}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Data: ', data);
+                        this.results = data;
+                    });
+            })
+        }
+    });
 </script>
 </html>
